@@ -46,3 +46,9 @@ Implementar uma solução para gerenciamento de artistas e álbuns, com autentic
 |Validation|
 |Java Mail Sender|
 |Spring Boot Actuator|
+
+---
+
+## Gestão do Projeto
+
+A gestão do projeto será feita na aba de [Projetos](https://github.com/users/repositoryjosequintino/projects/1/views/1).
