@@ -23,13 +23,13 @@ public class UsuarioEntity implements Serializable {
     private Long code;
 
     @Column(name = "code_public", unique = true, nullable = false)
-    private String codePublic = UUID.randomUUID().toString();
-
-    @Column(name = "perfil", nullable = false)
-    private String perfil;
+    private UUID codePublic = UUID.randomUUID();
 
     @Column(name = "nome", unique = true, nullable = false)
     private String nome;
+    
+    @Column(name = "perfil", nullable = false)
+    private String perfil;
 
     @Column(name = "identificador", unique = true, nullable = false)
     private String identificador;
@@ -37,10 +37,11 @@ public class UsuarioEntity implements Serializable {
     @Column(name = "chave_acesso", nullable = false)
     private String chaveAcesso;
 
-    @Column(name = "token", unique = true, nullable = false)
+    // FIXME: Campo deve ser obrigatório
+    @Column(name = "token", unique = true, nullable = true)
     private String token;
 
-    @Column(name = "hash_cadastro", unique = true)
+    @Column(name = "hash_cadastro", unique = true, nullable = true)
     private String hashCadastro;
 
     @Column(name = "is_conta_verificada")
@@ -55,8 +56,8 @@ public class UsuarioEntity implements Serializable {
     @Column(name = "deleted_at")
     private Instant deletedAt;
 
-    @Column(name = "active", nullable = false)
-    private Boolean active = true;
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive = true;
     
     public UsuarioEntity() {}
 
@@ -68,11 +69,11 @@ public class UsuarioEntity implements Serializable {
 		this.code = code;
 	}
 
-	public String getCodePublic() {
+	public UUID getCodePublic() {
 		return codePublic;
 	}
 
-	public void setCodePublic(String codePublic) {
+	public void setCodePublic(UUID codePublic) {
 		this.codePublic = codePublic;
 	}
 
@@ -156,12 +157,12 @@ public class UsuarioEntity implements Serializable {
 		this.deletedAt = deletedAt;
 	}
 
-	public Boolean getActive() {
-		return active;
+	public Boolean getIsActive() {
+		return isActive;
 	}
 
-	public void setActive(Boolean active) {
-		this.active = active;
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public static long getSerialversionuid() {
