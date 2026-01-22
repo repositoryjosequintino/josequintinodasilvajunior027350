@@ -49,6 +49,14 @@ Implementar uma solução para gerenciamento de artistas e álbuns, com autentic
 
 ---
 
+## Requisitos do Sistema
+
+|Requisito Funcional|Implementado?|
+|---|---|
+|[Autenticação JWT com expiração a cada 5 minutos e possibilidade de renovação](https://github.com/repositoryjosequintino/josequintinodasilvajunior027350/issues/4)| [] |
+
+---
+
 ## Gestão do Projeto
 
 A gestão do projeto será feita na aba de [Projetos](https://github.com/users/repositoryjosequintino/projects/1/views/1).
