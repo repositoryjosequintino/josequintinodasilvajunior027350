@@ -19,7 +19,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtility {
 	
 	@Value("${jwt.secret}")
-    private String segredo;
+    private static String segredo;
 	
 	@Value("${jwt.access.token.expiration}")
 	private Long accessTokenExpiration;
@@ -31,7 +31,7 @@ public class JwtUtility {
 	
 	private final static String TYPE_TOKEN_REFRESH = "REFRESH";
 	
-	private SecretKey getSigningKey() {
+	private static SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(segredo.getBytes(StandardCharsets.UTF_8));
     }
 	
@@ -65,23 +65,23 @@ public class JwtUtility {
                 .compact();
 	}
 	
-	public Long extractCodeToken(String token) {
+	public static Long extractCodeToken(String token) {
 		return extractClaim(token, claims -> claims.get("code", Long.class));
 	}
 	
-	public String extractNomeToken(String nome) {
+	public static String extractNomeToken(String nome) {
 		return extractClaim(nome, claims -> claims.get("nome", String.class));
 	}
 	
-	public String extractIdentificadorToken(String identificador) {
+	public static String extractIdentificadorToken(String identificador) {
 		return extractClaim(identificador, claims -> claims.get("identificador", String.class));
 	}
 	
-	public String extractPerfilToken(String perfil) {
+	public static String extractPerfilToken(String perfil) {
 		return extractClaim(perfil, claims -> claims.get("perfil", String.class));
 	}
 	
-	public String extractTipoTokenToken(String tipo) {
+	public static String extractTipoTokenToken(String tipo) {
 		return extractClaim(tipo, claims -> claims.get("tipo", String.class));
 	}
 	
@@ -89,12 +89,12 @@ public class JwtUtility {
 		return extractClaim(token, Claims::getExpiration);
 	}
 	
-	private <R> R extractClaim(String token, Function<Claims, R> claimFunction) {
+	private static <R> R extractClaim(String token, Function<Claims, R> claimFunction) {
 		final Claims claims = getAllClaimsFromToken(token);
         return claimFunction.apply(claims);
 	}
 	
-	private Claims getAllClaimsFromToken(String token) {
+	private static Claims getAllClaimsFromToken(String token) {
         return Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload();
     }
 	
