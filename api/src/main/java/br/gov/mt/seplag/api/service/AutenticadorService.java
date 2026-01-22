@@ -1,5 +1,6 @@
 package br.gov.mt.seplag.api.service;
 
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -62,6 +63,8 @@ public class AutenticadorService {
 	}
 	
 	public UsuarioResponseTransfer acessarConta(UsuarioAcessarRequestTransfer usuarioAcessarRequestTransfer) {
+		
+		System.out.println(new Date());
 
 		UsuarioEntity usuarioEntity = this.usuarioRepository
 				.findByIdentificador(usuarioAcessarRequestTransfer.getIdentificador())

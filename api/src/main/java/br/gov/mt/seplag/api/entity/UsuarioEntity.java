@@ -45,9 +45,6 @@ public class UsuarioEntity implements Serializable {
 
     @Column(name = "REFRESH_TOKEN", length = 400, unique = true)
     private String refreshToken;
-    
-    @Column(name = "hash_cadastro", unique = true, nullable = false)
-    private String hashCadastro;
 
     @Column(name = "is_conta_verificada")
     private Boolean isContaVerificada = false;
@@ -122,14 +119,6 @@ public class UsuarioEntity implements Serializable {
 
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
-	}
-
-	public String getHashCadastro() {
-		return hashCadastro;
-	}
-
-	public void setHashCadastro(String hashCadastro) {
-		this.hashCadastro = hashCadastro;
 	}
 
 	public Boolean getIsContaVerificada() {

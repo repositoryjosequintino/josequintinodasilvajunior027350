@@ -69,20 +69,20 @@ public class JwtUtility {
 		return extractClaim(token, claims -> claims.get("code", Long.class));
 	}
 	
-	public String extractNomeToken(String nome) {
-		return extractClaim(nome, claims -> claims.get("nome", String.class));
+	public String extractNomeToken(String token) {
+	    return extractClaim(token, claims -> claims.get("nome", String.class));
 	}
-	
-	public String extractIdentificadorToken(String identificador) {
-		return extractClaim(identificador, claims -> claims.get("identificador", String.class));
+
+	public String extractIdentificadorToken(String token) {
+	    return extractClaim(token, claims -> claims.get("identificador", String.class));
 	}
-	
-	public String extractPerfilToken(String perfil) {
-		return extractClaim(perfil, claims -> claims.get("perfil", String.class));
+
+	public String extractPerfilToken(String token) {
+	    return extractClaim(token, claims -> claims.get("perfil", String.class));
 	}
-	
-	public String extractTipoTokenToken(String tipo) {
-		return extractClaim(tipo, claims -> claims.get("tipo", String.class));
+
+	public String extractTipoToken(String token) {
+	    return extractClaim(token, claims -> claims.get("type", String.class));
 	}
 	
 	public Date extractExpiration(String token) {
@@ -103,16 +103,16 @@ public class JwtUtility {
     }
 	
 	public Boolean validateToken(String token, String identificador) {
-		final String extractedIdentificador = extractIdentificadorToken(identificador);
+		final String extractedIdentificador = extractIdentificadorToken(token);
 		return (extractedIdentificador.equals(identificador) && !isTokenExpired(token));
 	}
 	
 	public Boolean isAccessToken(String token) {
-		return TYPE_TOKEN_ACCESS.equals(extractTipoTokenToken(token));
+		return TYPE_TOKEN_ACCESS.equals(extractTipoToken(token));
 	}
 	
 	public Boolean isRefreshToken(String token) {
-		return TYPE_TOKEN_REFRESH.equals(extractTipoTokenToken(token));
+		return TYPE_TOKEN_REFRESH.equals(extractTipoToken(token));
 	}
 
 }
