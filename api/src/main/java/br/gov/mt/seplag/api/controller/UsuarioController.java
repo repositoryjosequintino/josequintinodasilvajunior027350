@@ -5,8 +5,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.gov.mt.seplag.api.entity.UsuarioEntity;
 import br.gov.mt.seplag.api.service.UsuarioService;
+import br.gov.mt.seplag.api.transfer.UsuarioRequestTransfer;
+import br.gov.mt.seplag.api.transfer.UsuarioResponseTransfer;
 
 @RestController
 @RequestMapping("/api/v1/usuario")
@@ -18,9 +19,10 @@ public class UsuarioController {
 		this.usuarioService = usuarioService;
 	}
 
+	// FIXME: Implementar validações
 	@PostMapping
-	public UsuarioEntity create(@RequestBody UsuarioEntity usuarioEntity) {
-		return this.usuarioService.create(usuarioEntity);
+	public UsuarioResponseTransfer create(@RequestBody UsuarioRequestTransfer usuarioRequestTransfer) {
+		return this.usuarioService.create(usuarioRequestTransfer);
 	}
 
 }

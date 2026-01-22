@@ -3,8 +3,10 @@ package br.gov.mt.seplag.api.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.gov.mt.seplag.api.entity.UsuarioEntity;
+import br.gov.mt.seplag.api.mapper.UsuarioMapper;
 import br.gov.mt.seplag.api.repository.UsuarioRepository;
+import br.gov.mt.seplag.api.transfer.UsuarioRequestTransfer;
+import br.gov.mt.seplag.api.transfer.UsuarioResponseTransfer;
 
 @Service
 public class UsuarioService {
@@ -16,8 +18,8 @@ public class UsuarioService {
 	}
 	
 	@Transactional
-	public UsuarioEntity create(UsuarioEntity usuarioEntity) {
-		return this.usuarioRepository.save(usuarioEntity);
+	public UsuarioResponseTransfer create(UsuarioRequestTransfer usuarioRequestTransfer) {
+		return UsuarioMapper.from(this.usuarioRepository.save(UsuarioMapper.from(usuarioRequestTransfer)));
 	}
 
 }

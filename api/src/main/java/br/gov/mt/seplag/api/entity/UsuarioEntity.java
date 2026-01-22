@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.UUID;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,19 +40,20 @@ public class UsuarioEntity implements Serializable {
     @Column(name = "chave_acesso", nullable = false)
     private String chaveAcesso;
 
-    // FIXME: Campo deve ser obrigatório
-    @Column(name = "token", unique = true, nullable = true)
+    @Column(name = "token", unique = true, nullable = false)
     private String token;
 
-    @Column(name = "hash_cadastro", unique = true, nullable = true)
+    @Column(name = "hash_cadastro", unique = true, nullable = false)
     private String hashCadastro;
 
     @Column(name = "is_conta_verificada")
     private Boolean isContaVerificada = false;
 
+    @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)
     private Instant createdAt = Instant.now();
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
 
