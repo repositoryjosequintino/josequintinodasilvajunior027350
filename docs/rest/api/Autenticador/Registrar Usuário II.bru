@@ -1,0 +1,25 @@
+meta {
+  name: Registrar Usuário II
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/api/v1/autenticador/usuario/registrar
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nome": "José Quintino",
+    "perfil": "USUARIO",
+    "identificador": "josequintino@hotmail.com.br",
+    "chaveAcesso": "senha-forte"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

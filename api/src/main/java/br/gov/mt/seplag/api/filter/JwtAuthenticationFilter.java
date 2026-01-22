@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		
 		if (identificador != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 			if (jwtUtility.validateToken(jwt, identificador) && jwtUtility.isAccessToken(jwt)) {
-				String perfil = jwtUtility.extractPerfilToken(jwt);
+				String perfil = JwtUtility.extractPerfilToken(jwt);
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
 						new UsernamePasswordAuthenticationToken(identificador,
 						null, 

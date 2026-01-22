@@ -1,5 +1,6 @@
 package br.gov.mt.seplag.api.transfer;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -10,10 +11,13 @@ public class UsuarioRequestTransfer {
 	@NotBlank(message = "Campo obrigatório")
     private String nome;
     
-	@Pattern(regexp = "⁽ADMINISTRADOR|USUARIO)$", message = "Os perfils aceitos são: ADMINISTRADOR ou USUARIO")
+	@Pattern(
+			regexp = "^(ADMINISTRADOR|USUARIO)$", 
+			message = "Os perfils aceitos são: ADMINISTRADOR ou USUARIO")
 	@NotBlank(message = "Campo obrigatório")
     private String perfil;
 
+	@Email(message = "O e-mail deve ser válido!")
 	@NotBlank(message = "Campo obrigatório")
     private String identificador;
 
