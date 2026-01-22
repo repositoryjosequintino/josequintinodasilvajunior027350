@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.gov.mt.seplag.api.service.AutenticadorService;
 import br.gov.mt.seplag.api.transfer.MensagemResponseTransfer;
+import br.gov.mt.seplag.api.transfer.UsuarioAcessarRequestTransfer;
 import br.gov.mt.seplag.api.transfer.UsuarioRequestTransfer;
+import br.gov.mt.seplag.api.transfer.UsuarioResponseTransfer;
 import jakarta.validation.Valid;
 
 @RestController
@@ -25,6 +27,11 @@ public class AutenticadorController {
 	@PostMapping("/usuario/registrar")
 	public ResponseEntity<MensagemResponseTransfer> registrarUsuario(@Valid @RequestBody UsuarioRequestTransfer usuarioRequestTransfer) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(this.autenticadorService.registrarUsuario(usuarioRequestTransfer));
+	}
+	
+	@PostMapping("/acessar")
+	public ResponseEntity<UsuarioResponseTransfer> acessarConta(@Valid @RequestBody UsuarioAcessarRequestTransfer usuarioAcessarRequestTransfer) {
+		return ResponseEntity.status(HttpStatus.OK).body(this.autenticadorService.acessarConta(usuarioAcessarRequestTransfer));
 	}
 
 }

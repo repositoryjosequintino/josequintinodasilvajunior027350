@@ -12,8 +12,6 @@ public class UsuarioMapper {
 			usuarioEntity.setPerfil(usuarioRequestTransfer.getPerfil());
 			usuarioEntity.setIdentificador(usuarioRequestTransfer.getIdentificador());
 			usuarioEntity.setChaveAcesso(usuarioRequestTransfer.getChaveAcesso());
-			usuarioEntity.setToken("TOKEN_FAKE_");
-			usuarioEntity.setHashCadastro("HASH_FAKE");
 		return usuarioEntity;
 	}
 	
@@ -25,7 +23,8 @@ public class UsuarioMapper {
 			usuarioResponseTransfer.setIsContaVerificada(String.valueOf(usuarioEntity.getIsContaVerificada()));
 			usuarioResponseTransfer.setNome(usuarioEntity.getNome());
 			usuarioResponseTransfer.setPerfil(usuarioEntity.getPerfil());
-			usuarioResponseTransfer.setToken(usuarioEntity.getToken());
+			usuarioResponseTransfer.setAccessToken(usuarioEntity.getAccessToken());
+			usuarioResponseTransfer.setRefreshToken(usuarioEntity.getRefreshToken());
 		return usuarioResponseTransfer;
 	}
 

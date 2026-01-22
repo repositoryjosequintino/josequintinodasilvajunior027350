@@ -7,11 +7,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.gov.mt.seplag.api.entity.UsuarioEntity;
+import br.gov.mt.seplag.api.exception.InvalidCredentialException;
 import br.gov.mt.seplag.api.exception.ResourceAlreadyExistsException;
 import br.gov.mt.seplag.api.mapper.UsuarioMapper;
 import br.gov.mt.seplag.api.repository.UsuarioRepository;
 import br.gov.mt.seplag.api.transfer.MensagemResponseTransfer;
+import br.gov.mt.seplag.api.transfer.UsuarioAcessarRequestTransfer;
 import br.gov.mt.seplag.api.transfer.UsuarioRequestTransfer;
+import br.gov.mt.seplag.api.transfer.UsuarioResponseTransfer;
 import br.gov.mt.seplag.api.utility.JwtUtility;
 
 @Service
@@ -56,6 +59,29 @@ public class AutenticadorService {
 		
 		return new MensagemResponseTransfer("Uma senha temporária foi enviada para seu e-mail!");
 		
+	}
+	
+	public UsuarioResponseTransfer acessarConta(UsuarioAcessarRequestTransfer usuarioAcessarRequestTransfer) {
+
+		UsuarioEntity usuarioEntity = this.usuarioRepository
+				.findByIdentificador(usuarioAcessarRequestTransfer.getIdentificador())
+				.orElseThrow(() -> new InvalidCredentialException("Os dados informados não são válidos!"));
+		
+		if (!passwordEncoder.matches(usuarioAcessarRequestTransfer.getChaveAcesso(), usuarioEntity.getChaveAcesso())) {
+			throw new InvalidCredentialException("Os dados informados não são válidos!!");
+		}
+		
+		String accessToken = this.jwtUtility.generateAccessToken(usuarioEntity.getCode(), usuarioEntity.getNome(),
+				usuarioEntity.getIdentificador(), usuarioEntity.getPerfil());
+		
+		String refreshToken = this.jwtUtility.generateRefreshToken(usuarioEntity.getCode(), usuarioEntity.getIdentificador());
+		
+			usuarioEntity.setAccessToken(accessToken);
+			usuarioEntity.setRefreshToken(refreshToken);
+		
+		this.usuarioRepository.save(usuarioEntity);
+
+		return UsuarioMapper.from(usuarioEntity);
 	}
 	
 	private String gerarSenhaTemporaria() {

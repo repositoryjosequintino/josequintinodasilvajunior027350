@@ -60,3 +60,7 @@ Implementar uma solução para gerenciamento de artistas e álbuns, com autentic
 ## Gestão do Projeto
 
 A gestão do projeto será feita na aba de [Projetos](https://github.com/users/repositoryjosequintino/projects/1/views/1).
+
+# Testes
+
+Recomenda-se o servidor de e-mail temporário [Temp-mail](https://temp-mail.org/pt/view/697277dde1887d01aec2a258).

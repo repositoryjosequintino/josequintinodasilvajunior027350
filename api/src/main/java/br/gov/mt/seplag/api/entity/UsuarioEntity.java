@@ -40,9 +40,12 @@ public class UsuarioEntity implements Serializable {
     @Column(name = "chave_acesso", nullable = false)
     private String chaveAcesso;
 
-    @Column(name = "token", unique = true, nullable = false)
-    private String token;
+    @Column(name = "token", length = 400, unique = true)
+    private String accessToken;
 
+    @Column(name = "REFRESH_TOKEN", length = 400, unique = true)
+    private String refreshToken;
+    
     @Column(name = "hash_cadastro", unique = true, nullable = false)
     private String hashCadastro;
 
@@ -113,12 +116,12 @@ public class UsuarioEntity implements Serializable {
 		this.chaveAcesso = chaveAcesso;
 	}
 
-	public String getToken() {
-		return token;
+	public String getAccessToken() {
+		return accessToken;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 
 	public String getHashCadastro() {
@@ -171,6 +174,14 @@ public class UsuarioEntity implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
 	}
 
 }
