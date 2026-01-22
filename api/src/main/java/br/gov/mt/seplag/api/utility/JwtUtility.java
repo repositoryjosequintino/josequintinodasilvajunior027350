@@ -19,7 +19,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtility {
 	
 	@Value("${jwt.secret}")
-    private static String segredo;
+    private String segredo;
 	
 	@Value("${jwt.access.token.expiration}")
 	private Long accessTokenExpiration;
@@ -27,18 +27,18 @@ public class JwtUtility {
 	@Value("${jwt.refresh.token.expiration}")
 	private Long refreshTokenExpiration;
 	
-	private final static String TYPE_TOKEN_ACCESS = "ACCESS";
+	private final String TYPE_TOKEN_ACCESS = "ACCESS";
 	
-	private final static String TYPE_TOKEN_REFRESH = "REFRESH";
+	private final String TYPE_TOKEN_REFRESH = "REFRESH";
 	
-	private static SecretKey getSigningKey() {
+	private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(segredo.getBytes(StandardCharsets.UTF_8));
     }
 	
 	public String generateAccessToken(Long code, String nome, String identificador, String perfil) {
 		Map<String, Object> claimMap = new HashMap<>();
 			claimMap.put("code", code);
-			claimMap.put("code", nome);
+			claimMap.put("nome", nome);
 			claimMap.put("identificador", identificador);
 			claimMap.put("perfil", perfil);
 			claimMap.put("type", TYPE_TOKEN_ACCESS);
@@ -65,23 +65,23 @@ public class JwtUtility {
                 .compact();
 	}
 	
-	public static Long extractCodeToken(String token) {
+	public Long extractCodeToken(String token) {
 		return extractClaim(token, claims -> claims.get("code", Long.class));
 	}
 	
-	public static String extractNomeToken(String nome) {
+	public String extractNomeToken(String nome) {
 		return extractClaim(nome, claims -> claims.get("nome", String.class));
 	}
 	
-	public static String extractIdentificadorToken(String identificador) {
+	public String extractIdentificadorToken(String identificador) {
 		return extractClaim(identificador, claims -> claims.get("identificador", String.class));
 	}
 	
-	public static String extractPerfilToken(String perfil) {
+	public String extractPerfilToken(String perfil) {
 		return extractClaim(perfil, claims -> claims.get("perfil", String.class));
 	}
 	
-	public static String extractTipoTokenToken(String tipo) {
+	public String extractTipoTokenToken(String tipo) {
 		return extractClaim(tipo, claims -> claims.get("tipo", String.class));
 	}
 	
@@ -89,12 +89,12 @@ public class JwtUtility {
 		return extractClaim(token, Claims::getExpiration);
 	}
 	
-	private static <R> R extractClaim(String token, Function<Claims, R> claimFunction) {
+	private <R> R extractClaim(String token, Function<Claims, R> claimFunction) {
 		final Claims claims = getAllClaimsFromToken(token);
         return claimFunction.apply(claims);
 	}
 	
-	private static Claims getAllClaimsFromToken(String token) {
+	private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload();
     }
 	

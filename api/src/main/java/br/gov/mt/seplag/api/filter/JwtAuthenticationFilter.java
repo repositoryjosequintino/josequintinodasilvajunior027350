@@ -34,7 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
 			try {
 				jwt = authorizationHeader.substring(7);
-				identificador = JwtUtility.extractIdentificadorToken(jwt);
+				identificador = jwtUtility.extractIdentificadorToken(jwt);
 			} catch (Exception e) {
 				logger.error("Erro ao manipular JWT: " + e.getMessage());
 			}
@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		
 		if (identificador != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 			if (jwtUtility.validateToken(jwt, identificador) && jwtUtility.isAccessToken(jwt)) {
-				String perfil = JwtUtility.extractPerfilToken(jwt);
+				String perfil = jwtUtility.extractPerfilToken(jwt);
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
 						new UsernamePasswordAuthenticationToken(identificador,
 						null, 
