@@ -1,0 +1,45 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
+  <diagram name="Página-1" id="x50M_B9a_64HMZqotYoK">
+    <mxGraphModel dx="2455" dy="953" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xUEb62eYZ-aHirVGF969-13" value="" style="swimlane;startSize=0;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="347" y="262" width="495" height="319" as="geometry" />
+        </mxCell>
+        <mxCell id="xUEb62eYZ-aHirVGF969-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shape=link;" edge="1" parent="xUEb62eYZ-aHirVGF969-13" source="xUEb62eYZ-aHirVGF969-7" target="xUEb62eYZ-aHirVGF969-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xUEb62eYZ-aHirVGF969-7" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/API_Management_Services.svg;" vertex="1" parent="xUEb62eYZ-aHirVGF969-13">
+          <mxGeometry x="53" y="55" width="114" height="105.61" as="geometry" />
+        </mxCell>
+        <mxCell id="xUEb62eYZ-aHirVGF969-9" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/databases/SQL_Database.svg;" vertex="1" parent="xUEb62eYZ-aHirVGF969-13">
+          <mxGeometry x="303" y="75.80999999999995" width="48" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="xUEb62eYZ-aHirVGF969-10" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.021;entryY=0.51;entryDx=0;entryDy=0;entryPerimeter=0;shape=link;" edge="1" parent="xUEb62eYZ-aHirVGF969-13" source="xUEb62eYZ-aHirVGF969-7" target="xUEb62eYZ-aHirVGF969-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xUEb62eYZ-aHirVGF969-15" value="" style="sketch=0;points=[[0.015,0.015,0],[0.985,0.015,0],[0.985,0.985,0],[0.015,0.985,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];verticalLabelPosition=bottom;html=1;verticalAlign=top;aspect=fixed;align=center;pointerEvents=1;shape=mxgraph.cisco19.rect;prIcon=storage;fillColor=#FAFAFA;strokeColor=#005073;" vertex="1" parent="xUEb62eYZ-aHirVGF969-13">
+          <mxGeometry x="69.04" y="218" width="81.92" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="xUEb62eYZ-aHirVGF969-8" value="&lt;div style=&quot;color: rgb(59, 59, 59); background-color: rgb(255, 255, 255); font-family: &amp;quot;ComicShannsMono Nerd Font Mono&amp;quot;, &amp;quot;Droid Sans Mono&amp;quot;, monospace; font-size: 14px; line-height: 19px; white-space: pre;&quot;&gt;&lt;b&gt;Service&lt;/b&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" vertex="1" parent="xUEb62eYZ-aHirVGF969-13">
+          <mxGeometry x="60" y="32" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xUEb62eYZ-aHirVGF969-18" value="&lt;div style=&quot;color: rgb(59, 59, 59); background-color: rgb(255, 255, 255); font-family: &amp;quot;ComicShannsMono Nerd Font Mono&amp;quot;, &amp;quot;Droid Sans Mono&amp;quot;, monospace; font-size: 14px; line-height: 19px; white-space: pre;&quot;&gt;&lt;b&gt;PostgreSQL&lt;/b&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" vertex="1" parent="xUEb62eYZ-aHirVGF969-13">
+          <mxGeometry x="277" y="134.5" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xUEb62eYZ-aHirVGF969-19" value="&lt;div style=&quot;color: rgb(59, 59, 59); background-color: rgb(255, 255, 255); font-family: &amp;quot;ComicShannsMono Nerd Font Mono&amp;quot;, &amp;quot;Droid Sans Mono&amp;quot;, monospace; font-size: 14px; line-height: 19px; white-space: pre;&quot;&gt;&lt;b&gt;Storage (MinIO)&lt;/b&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" vertex="1" parent="xUEb62eYZ-aHirVGF969-13">
+          <mxGeometry x="60" y="278" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xUEb62eYZ-aHirVGF969-21" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;shape=filledEdge;dashed=1;" edge="1" parent="xUEb62eYZ-aHirVGF969-13" source="xUEb62eYZ-aHirVGF969-18" target="xUEb62eYZ-aHirVGF969-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xUEb62eYZ-aHirVGF969-22" value="ObjectID" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="xUEb62eYZ-aHirVGF969-21">
+          <mxGeometry x="-0.1378" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

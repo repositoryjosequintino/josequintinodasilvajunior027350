@@ -52,3 +52,8 @@ Implementar uma solução para gerenciamento de artistas e álbuns, com autentic
 ## Gestão do Projeto
 
 A gestão do projeto será feita na aba de [Projetos](https://github.com/users/repositoryjosequintino/projects/1/views/1).
+
+|Data|Autor|Tarefa|Descrição|
+|---|---|---|---|
+|22/01/2026|[@josequintino](https://github.com/repositoryjosequintino)|SEPLAGMT22012026000730API|Criar projeto backend|
+|21/01/2026|[@josequintino](https://github.com/repositoryjosequintino)|SEPLAGMT21012026235541DOC|Criar documentação do sistema|
