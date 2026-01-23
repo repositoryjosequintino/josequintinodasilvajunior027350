@@ -39,6 +39,9 @@ public class UsuarioEntity implements Serializable {
 
     @Column(name = "chave_acesso", nullable = false)
     private String chaveAcesso;
+    
+    @Column(name = "CHAVE_ACESSO_ANTERIOR")
+    private String chaveAcessoAnterior;
 
     @Column(name = "token", length = 400, unique = true)
     private String accessToken;
@@ -111,6 +114,14 @@ public class UsuarioEntity implements Serializable {
 
 	public void setChaveAcesso(String chaveAcesso) {
 		this.chaveAcesso = chaveAcesso;
+	}
+
+	public String getChaveAcessoAnterior() {
+		return chaveAcessoAnterior;
+	}
+
+	public void setChaveAcessoAnterior(String chaveAcessoAnterior) {
+		this.chaveAcessoAnterior = chaveAcessoAnterior;
 	}
 
 	public String getAccessToken() {

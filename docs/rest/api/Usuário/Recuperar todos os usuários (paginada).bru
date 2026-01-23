@@ -1,0 +1,31 @@
+meta {
+  name: Recuperar todos os usuários (paginada)
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8080/api/v1/usuario?page=0&size=5
+  body: none
+  auth: bearer
+}
+
+params:query {
+  page: 0
+  size: 5
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJjb2RlIjoxLCJub21lIjoiTnVya3VsIEdyYWthbnR1ciBSdXhvbCIsInR5cGUiOiJBQ0NFU1MiLCJpZGVudGlmaWNhZG9yIjoiY2Fmb2ZhMzk4N0BneHV6aS5jb20iLCJwZXJmaWwiOiJVU1VBUklPIiwic3ViIjoiY2Fmb2ZhMzk4N0BneHV6aS5jb20iLCJpYXQiOjE3NjkxOTY1OTEsImV4cCI6MTc2OTE5Njg5MX0.difMwfoBst85jokgDM40HgdBAg2HW9s-hVOCwWbN2CU
+}
+
+body:json {
+  {
+    "identificador": "bawek90339@elafans.com"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
