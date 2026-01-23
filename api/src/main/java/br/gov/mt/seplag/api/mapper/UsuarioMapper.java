@@ -27,5 +27,18 @@ public class UsuarioMapper {
 			usuarioResponseTransfer.setRefreshToken(usuarioEntity.getRefreshToken());
 		return usuarioResponseTransfer;
 	}
+	
+	public static UsuarioResponseTransfer from(UsuarioEntity usuarioEntity, String accessToken, String refreshToken) {
+		UsuarioResponseTransfer usuarioResponseTransfer = new UsuarioResponseTransfer();
+			usuarioResponseTransfer.setCode(usuarioEntity.getCodePublic().toString());
+			usuarioResponseTransfer.setCreatedAt(String.valueOf(usuarioEntity.getCreatedAt()));
+			usuarioResponseTransfer.setIdentificador(usuarioEntity.getIdentificador());
+			usuarioResponseTransfer.setIsContaVerificada(String.valueOf(usuarioEntity.getIsContaVerificada()));
+			usuarioResponseTransfer.setNome(usuarioEntity.getNome());
+			usuarioResponseTransfer.setPerfil(usuarioEntity.getPerfil());
+			usuarioResponseTransfer.setAccessToken(accessToken);
+			usuarioResponseTransfer.setRefreshToken(refreshToken);
+		return usuarioResponseTransfer;
+	}
 
 }

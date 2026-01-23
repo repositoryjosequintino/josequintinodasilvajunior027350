@@ -32,9 +32,7 @@ public class SecurityConfiguration {
 			"/api/v1/autenticador/refresh-token",
 			"/api/v1/autenticador/forgot-password",
 			"/api/v1/autenticador/acessar",
-            "/api/v1/autenticador/verificar-conta",
-            "/api/v1/autenticador/reenviar-email",
-            "/api/v1/autenticador/redefinir-senha"
+			"/api/v1/usuario/obter-informacao_usuario",
 	};
 	
 	private static final String VERBOS_HTTP[] = {
