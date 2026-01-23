@@ -1,0 +1,22 @@
+meta {
+  name: Refresh Token
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/api/v1/autenticador/refresh-token
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJjb2RlIjoxLCJ0eXBlIjoiUkVGUkVTSCIsImlkZW50aWZpY2Fkb3IiOiJiYXdlazkwMzM5QGVsYWZhbnMuY29tIiwic3ViIjoiYmF3ZWs5MDMzOUBlbGFmYW5zLmNvbSIsImlhdCI6MTc2OTEyNzE0NCwiZXhwIjoxNzY5NzMxOTQ0fQ.mF5q4Owg3KO-8rzQXQ1GKLwkKBenepp-6-S6cGzf_00"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

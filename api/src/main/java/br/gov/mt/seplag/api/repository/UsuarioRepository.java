@@ -13,4 +13,6 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
 	
 	Optional<UsuarioEntity> findByIdentificador(String identificador);
 	
+	Optional<UsuarioEntity> findByRefreshToken(String refreshToken);
+	
 }

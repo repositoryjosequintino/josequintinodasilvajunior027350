@@ -29,6 +29,8 @@ public class SecurityConfiguration {
 	private static final String PUBLIC_ENDPOINT[] = {
 			"/api/v1/usuario/registrar",
 			"/api/v1/autenticador/usuario/registrar",
+			"/api/v1/autenticador/refresh-token",
+			"/api/v1/autenticador/forgot-password",
 			"/api/v1/autenticador/acessar",
             "/api/v1/autenticador/verificar-conta",
             "/api/v1/autenticador/reenviar-email",
