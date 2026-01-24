@@ -34,7 +34,6 @@ public class SecurityConfiguration {
 			"/api/v1/autenticador/acessar",
 			"/api/v1/usuario/obter-informacao_usuario",
 			"/api/v1/usuario/atualizar-usuario",
-			"/api/v1/artista",
 	};
 	
 	private static final String VERBOS_HTTP[] = {
@@ -58,6 +57,7 @@ public class SecurityConfiguration {
                 .build();
     }
 	
+	@Bean
 	public CorsConfigurationSource configurationSource() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 			corsConfiguration.setAllowedMethods(Arrays.asList(VERBOS_HTTP));
