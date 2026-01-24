@@ -46,6 +46,7 @@ Implementar uma solução para gerenciamento de artistas e álbuns, com autentic
 |Validation|
 |Java Mail Sender|
 |Spring Boot Actuator|
+|[Min.io](https://docs.min.io/enterprise/aistor-object-store/installation/container/install/)|
 
 ---
 

@@ -117,6 +117,14 @@
 			<scope>runtime</scope>
 		</dependency>
 		
+		<!-- Source: https://mvnrepository.com/artifact/io.minio/minio -->
+		<dependency>
+			<groupId>io.minio</groupId>
+			<artifactId>minio</artifactId>
+			<version>8.5.16</version>
+			<scope>compile</scope>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
