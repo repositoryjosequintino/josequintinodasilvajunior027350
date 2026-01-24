@@ -1,0 +1,26 @@
+meta {
+  name: Deletar Artista
+  type: http
+  seq: 3
+}
+
+delete {
+  url: http://localhost:8080/api/v1/artista/ad70dd32-cf6e-445b-b0c8-cf3775295215
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJjb2RlIjoxLCJub21lIjoiTnVya3VsIEdyYWthbnR1ciBSdXhvbCIsInR5cGUiOiJBQ0NFU1MiLCJpZGVudGlmaWNhZG9yIjoibG9uZy5mb3gucGh3bUBwcm90ZWN0c21haWwubmV0IiwicGVyZmlsIjoiQURNSU5JU1RSQURPUiIsInN1YiI6ImxvbmcuZm94LnBod21AcHJvdGVjdHNtYWlsLm5ldCIsImlhdCI6MTc2OTI2NjAxMywiZXhwIjoxNzY5MjY5MDEzfQ.aneTQxzvLpPiVnUA5tBoktoYctCaAqOfXLIW7b6SCzg
+}
+
+body:json {
+  {
+    "nome": "Mago de Oz (Atualização 2)"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

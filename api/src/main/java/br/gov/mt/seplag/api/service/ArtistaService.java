@@ -1,5 +1,6 @@
 package br.gov.mt.seplag.api.service;
 
+import java.time.Instant;
 import java.util.UUID;
 
 import org.springframework.dao.DataIntegrityViolationException;
@@ -13,6 +14,7 @@ import br.gov.mt.seplag.api.repository.ArtistaRepository;
 import br.gov.mt.seplag.api.transfer.ArtistaAtualizacaoRequestTransfer;
 import br.gov.mt.seplag.api.transfer.ArtistaRequestTransfer;
 import br.gov.mt.seplag.api.transfer.ArtistaResponseTransfer;
+import br.gov.mt.seplag.api.transfer.MensagemResponseTransfer;
 
 @Service
 public class ArtistaService implements ArtistaInterfaceService {
@@ -61,6 +63,24 @@ public class ArtistaService implements ArtistaInterfaceService {
 
 		return ArtistaMapper.from(artistaEntity);
 
+	}
+	
+	public MensagemResponseTransfer delete(UUID codePublic) {
+		
+		ArtistaEntity artistaEntity = this.artistaRepository.findByCodePublic(codePublic)
+				.orElseThrow(() -> new NegocialException("Artista não encontrado!"));
+		
+		if (!artistaEntity.getIsActive()) {
+			throw new NegocialException("Esse artista já foi inativado!");
+		}
+		
+		artistaEntity.setIsActive(false);
+		artistaEntity.setDeletedAt(Instant.now());
+		
+		this.artistaRepository.save(artistaEntity);
+		
+		return new MensagemResponseTransfer("Artista inativado com sucesso!");
+		
 	}
 
 }

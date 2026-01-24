@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,6 +16,7 @@ import br.gov.mt.seplag.api.service.ArtistaService;
 import br.gov.mt.seplag.api.transfer.ArtistaAtualizacaoRequestTransfer;
 import br.gov.mt.seplag.api.transfer.ArtistaRequestTransfer;
 import br.gov.mt.seplag.api.transfer.ArtistaResponseTransfer;
+import br.gov.mt.seplag.api.transfer.MensagemResponseTransfer;
 import jakarta.validation.Valid;
 
 @RestController
@@ -40,6 +42,13 @@ public class ArtistaController {
 			Authentication authentication
 			) {
 		return ResponseEntity.ok(this.artistaService.update(codePublic, artistaAtualizacaoRequestTransfer));
+	}
+	
+	@DeleteMapping("/{codePublic}")
+	public ResponseEntity<MensagemResponseTransfer> delete(
+			@PathVariable UUID codePublic,
+			Authentication authentication) {
+		return ResponseEntity.ok(this.artistaService.delete(codePublic));
 	}
 
 }
