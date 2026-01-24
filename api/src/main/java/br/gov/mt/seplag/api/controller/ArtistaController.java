@@ -60,5 +60,10 @@ public class ArtistaController {
 			Authentication authentication) {
 		return ResponseEntity.ok(this.artistaService.findAll(page, size));
 	}
+	
+	@GetMapping("/{codePublic}")
+	public ResponseEntity<ArtistaResponseTransfer> findOne(@PathVariable UUID codePublic) {
+		return ResponseEntity.ok(this.artistaService.findOne(codePublic));
+	}
 
 }

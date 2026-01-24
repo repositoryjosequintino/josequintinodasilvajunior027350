@@ -103,5 +103,14 @@ public class ArtistaService implements ArtistaInterfaceService {
 				artistaPage.isFirst(), artistaPage.isLast());
 
 	}
+	
+	public ArtistaResponseTransfer findOne(UUID codePublic) {
+		
+		ArtistaEntity artistaEntity = this.artistaRepository.findByCodePublic(codePublic)
+				.orElseThrow(() -> new NegocialException("Artista não encontrado!"));
+		
+		return ArtistaMapper.from(artistaEntity);
+		
+	}
 
 }
