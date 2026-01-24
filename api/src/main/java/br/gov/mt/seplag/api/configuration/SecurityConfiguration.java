@@ -34,6 +34,7 @@ public class SecurityConfiguration {
 			"/api/v1/autenticador/acessar",
 			"/api/v1/usuario/obter-informacao_usuario",
 			"/api/v1/usuario/atualizar-usuario",
+			"/api/v1/artista",
 	};
 	
 	private static final String VERBOS_HTTP[] = {

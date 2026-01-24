@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,6 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				identificador = jwtUtility.extractIdentificadorToken(jwt);
 			} catch (Exception e) {
 				logger.error("Erro ao manipular JWT: " + e.getMessage());
+				throw new BadCredentialsException("Token expirado ou inválido!");
 			}
 		}
 		

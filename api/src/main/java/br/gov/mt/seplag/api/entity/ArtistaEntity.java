@@ -42,6 +42,10 @@ public class ArtistaEntity implements Serializable {
     
     public ArtistaEntity() {}
 
+	public ArtistaEntity(String nome) {
+		this.nome = nome;
+	}
+
 	public Long getCode() {
 		return code;
 	}
