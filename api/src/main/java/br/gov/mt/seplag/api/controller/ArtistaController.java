@@ -2,6 +2,7 @@ package br.gov.mt.seplag.api.controller;
 
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,8 @@ public class ArtistaController {
 	@PostMapping
 	public ResponseEntity<ArtistaResponseTransfer> cadastrarArtista(
 			@RequestBody @Valid ArtistaRequestTransfer artistaRequestTransfer) {
-		return ResponseEntity.ok().body(this.artistaService.cadastrarArtista(artistaRequestTransfer));
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(this.artistaService.cadastrarArtista(artistaRequestTransfer));
 	}
 	
 	@PutMapping("/{codePublic}")
@@ -50,7 +52,7 @@ public class ArtistaController {
 	public ResponseEntity<MensagemResponseTransfer> delete(
 			@PathVariable UUID codePublic,
 			Authentication authentication) {
-		return ResponseEntity.ok(this.artistaService.delete(codePublic));
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.artistaService.delete(codePublic));
 	}
 	
 	@GetMapping
