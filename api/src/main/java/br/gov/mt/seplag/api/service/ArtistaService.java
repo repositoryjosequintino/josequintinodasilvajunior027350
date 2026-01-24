@@ -1,9 +1,14 @@
 package br.gov.mt.seplag.api.service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +20,7 @@ import br.gov.mt.seplag.api.transfer.ArtistaAtualizacaoRequestTransfer;
 import br.gov.mt.seplag.api.transfer.ArtistaRequestTransfer;
 import br.gov.mt.seplag.api.transfer.ArtistaResponseTransfer;
 import br.gov.mt.seplag.api.transfer.MensagemResponseTransfer;
+import br.gov.mt.seplag.api.transfer.PaginatedResponseTransfer;
 
 @Service
 public class ArtistaService implements ArtistaInterfaceService {
@@ -81,6 +87,21 @@ public class ArtistaService implements ArtistaInterfaceService {
 		
 		return new MensagemResponseTransfer("Artista inativado com sucesso!");
 		
+	}
+	
+	public PaginatedResponseTransfer<ArtistaResponseTransfer> findAll(int page, int size) {
+
+		Pageable pageable = PageRequest.of(page, size);
+
+		Page<ArtistaEntity> artistaPage = this.artistaRepository.findAll(pageable);
+
+		List<ArtistaResponseTransfer> artistaResponseTransferList = artistaPage.getContent().stream()
+				.map(artista -> ArtistaMapper.from(artista)).collect(Collectors.toList());
+
+		return new PaginatedResponseTransfer<>(artistaResponseTransferList, artistaPage.getNumber(),
+				artistaPage.getSize(), artistaPage.getTotalElements(), artistaPage.getTotalPages(),
+				artistaPage.isFirst(), artistaPage.isLast());
+
 	}
 
 }
