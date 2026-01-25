@@ -25,8 +25,17 @@ public class ArquivoEntity implements Serializable {
     @Column(name = "CODE_PUBLIC", unique = true, nullable = false)
     private UUID codePublic = UUID.randomUUID();
 
-    @Column(name = "TITULO", unique = true, nullable = false)
-    private String titulo;
+    @Column(name = "NOME", unique = true, nullable = false)
+    private String nome;
+    
+    @Column(name = "TAMANHO", unique = true, nullable = false)
+    private String tamanho;
+    
+    @Column(name = "EXTENSAO", unique = true, nullable = false)
+    private String extensao;
+    
+    @Column(name = "ENDERECO", unique = true, nullable = false)
+    private String endereco;
     
     @Column(name = "CREATED_AT", updatable = false, nullable = false)
     private Instant createdAt = Instant.now();
@@ -41,6 +50,13 @@ public class ArquivoEntity implements Serializable {
     private Boolean isActive = true;
     
     public ArquivoEntity() {}
+
+	public ArquivoEntity(String nome, String tamanho, String extensao, String endereco) {
+		this.nome = nome;
+		this.tamanho = tamanho;
+		this.extensao = extensao;
+		this.endereco = endereco;
+	}
 
 	public Long getCode() {
 		return code;
@@ -58,12 +74,36 @@ public class ArquivoEntity implements Serializable {
 		this.codePublic = codePublic;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(String tamanho) {
+		this.tamanho = tamanho;
+	}
+
+	public String getExtensao() {
+		return extensao;
+	}
+
+	public void setExtensao(String extensao) {
+		this.extensao = extensao;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	public Instant getCreatedAt() {

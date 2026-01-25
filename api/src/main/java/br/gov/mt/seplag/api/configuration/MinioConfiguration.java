@@ -9,9 +9,9 @@ import io.minio.MinioClient;
 public class MinioConfiguration {
 	
 	@Bean
-	public MinioClient mionioClient() {
+	public MinioClient minioConfigurationClient() {
 		return MinioClient.builder()
-				.endpoint("http://localhost:9001")
+				.endpoint("http://localhost:9000")
 				.credentials("minioadmin", "minioadmin")
 				.build();
 	}
