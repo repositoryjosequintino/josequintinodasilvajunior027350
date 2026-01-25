@@ -6,17 +6,14 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "TB_ARTISTA_ALBUM")
-public class ArtistaAlbumEntity implements Serializable {
+@Table(name = "TB_ALBUM")
+public class ArquivoEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -28,13 +25,8 @@ public class ArtistaAlbumEntity implements Serializable {
     @Column(name = "CODE_PUBLIC", unique = true, nullable = false)
     private UUID codePublic = UUID.randomUUID();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_ARTISTA", nullable = false)
-    private ArtistaEntity artistaEntity;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_ALBUM", nullable = false)
-    private AlbumEntity albumEntity;
+    @Column(name = "TITULO", unique = true, nullable = false)
+    private String titulo;
     
     @Column(name = "CREATED_AT", updatable = false, nullable = false)
     private Instant createdAt = Instant.now();
@@ -48,12 +40,7 @@ public class ArtistaAlbumEntity implements Serializable {
     @Column(name = "IS_ACTIVE", nullable = false)
     private Boolean isActive = true;
     
-    public ArtistaAlbumEntity() {}
-
-	public ArtistaAlbumEntity(ArtistaEntity artistaEntity, AlbumEntity albumEntity) {
-		this.artistaEntity = artistaEntity;
-		this.albumEntity = albumEntity;
-	}
+    public ArquivoEntity() {}
 
 	public Long getCode() {
 		return code;
@@ -71,20 +58,12 @@ public class ArtistaAlbumEntity implements Serializable {
 		this.codePublic = codePublic;
 	}
 
-	public ArtistaEntity getArtistaEntity() {
-		return artistaEntity;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setArtistaEntity(ArtistaEntity artistaEntity) {
-		this.artistaEntity = artistaEntity;
-	}
-
-	public AlbumEntity getAlbumEntity() {
-		return albumEntity;
-	}
-
-	public void setAlbumEntity(AlbumEntity albumEntity) {
-		this.albumEntity = albumEntity;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public Instant getCreatedAt() {

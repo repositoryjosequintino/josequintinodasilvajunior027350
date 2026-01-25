@@ -42,6 +42,10 @@ public class AlbumEntity implements Serializable {
     
     public AlbumEntity() {}
 
+	public AlbumEntity(String titulo) {
+		this.titulo = titulo;
+	}
+
 	public Long getCode() {
 		return code;
 	}

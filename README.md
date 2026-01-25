@@ -64,4 +64,4 @@ A gestão do projeto será feita na aba de [Projetos](https://github.com/users/r
 
 # Testes
 
-Recomenda-se o servidor de e-mail temporário [Temp-mail](https://temp-mail.org/pt/view/697277dde1887d01aec2a258).
+Recomenda-se o servidor de e-mail temporário [Temp-mail](https://temp-mail.org/pt/view/697277dde1887d01aec2a258) ou [Guard Temp Mail](https://adguard.com/pt_br/adguard-temp-mail/overview.html).
