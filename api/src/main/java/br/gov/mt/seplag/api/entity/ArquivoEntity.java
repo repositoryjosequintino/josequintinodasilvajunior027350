@@ -20,16 +20,16 @@ public class ArquivoEntity implements Serializable {
     @Column(name = "CODE_PUBLIC", unique = true, nullable = false)
     private UUID codePublic = UUID.randomUUID();
 
-    @Column(name = "NOME", unique = true, nullable = false)
+    @Column(name = "NOME", nullable = false)
     private String nome;
     
-    @Column(name = "TAMANHO", unique = true, nullable = false)
+    @Column(name = "TAMANHO", nullable = false)
     private String tamanho;
     
-    @Column(name = "EXTENSAO", unique = true, nullable = false)
+    @Column(name = "EXTENSAO", nullable = false)
     private String extensao;
     
-    @Column(name = "ENDERECO", unique = true, nullable = false)
+    @Column(name = "ENDERECO", nullable = false)
     private String endereco;
     
     @Column(name = "CREATED_AT", updatable = false, nullable = false)

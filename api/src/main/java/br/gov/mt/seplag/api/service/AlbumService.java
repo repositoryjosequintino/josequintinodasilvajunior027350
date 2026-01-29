@@ -30,17 +30,20 @@ public class AlbumService {
 	private final ArtistaAlbumRepository artistaAlbumRepository;
 	
 	private final MinioService minioService;
+
+	private final ArtistaService artistaService;
 	
 	public AlbumService(
-			AlbumRepository albumRepository, 
-			ArtistaRepository artistaRepository,
-			ArtistaAlbumRepository artistaAlbumRepository, 
-			MinioService minioService) {
+            AlbumRepository albumRepository,
+            ArtistaRepository artistaRepository,
+            ArtistaAlbumRepository artistaAlbumRepository,
+            MinioService minioService, ArtistaService artistaService) {
 		this.albumRepository = albumRepository;
 		this.artistaRepository = artistaRepository;
 		this.artistaAlbumRepository = artistaAlbumRepository;
 		this.minioService = minioService;
-	}
+        this.artistaService = artistaService;
+    }
 
 	@Transactional
 	public AlbumResponseTransfer create(AlbumRequestTransfer albumRequestTransfer) {
@@ -64,10 +67,8 @@ public class AlbumService {
 	}
 
 	private ArtistaEntity validarDadosAlbum(AlbumRequestTransfer albumRequestTransfer) {
-		ArtistaEntity artistaEntity = this.artistaRepository
-				.findByCodePublic(albumRequestTransfer.getCodePublicArtista())
-				.orElseThrow(() -> new NegocialException("O artista informado não está cadastrado!"));
-		
+		ArtistaEntity artistaEntity = artistaService.recuperarArtista(albumRequestTransfer.getCodePublicArtista());
+
 		if (!artistaEntity.getIsActive()) {
 		    throw new NegocialException("O artista informado está inativo!");
 		}
@@ -77,7 +78,7 @@ public class AlbumService {
 		}
 		return artistaEntity;
 	}
-	
+
 	public AlbumUploadCapaResponseTransfer uploadCapa(
 		AlbumRequestTransfer albumRequestTransfer,
 		List<MultipartFile> multipartFileList) {
@@ -105,17 +106,5 @@ public class AlbumService {
 			String.valueOf(albumEntity.getCreatedAt())
 		);
 	}
-
-	// public ArquivoResponseTransfer recuperarCapaAlbum(UUID codePublic) {
-
-	// 	AlbumEntity albumEntity = this.artistaAlbumRepository.findByCodePublic(codePublic)
-	// 			.orElseThrow(() -> new NegocialException("Álbum não encontrado!"));
-
-	// 	List<ArquivoEntity> arquivoEntityList = minioService.uploadCapaAlbum(albumEntity, multipartFileList);
-
-	// 	InputStream inputStream = minioService.download(arquivoEntityList);
-
-	// 	return null;
-	// }
 	
 }

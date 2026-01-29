@@ -35,21 +35,22 @@ public class ArquivoService {
 
     private final ArtistaAlbumRepository artistaAlbumRepository;
 
+    private final ArtistaService artistaService;
+
     public ArquivoService(ArquivoRepository arquivoRepository, MinioService minioService,
-            AlbumRepository albumRepository, ArtistaRepository artistaRepository,
-            ArtistaAlbumRepository artistaAlbumRepository) {
+                          AlbumRepository albumRepository, ArtistaRepository artistaRepository,
+                          ArtistaAlbumRepository artistaAlbumRepository, ArtistaService artistaService) {
         this.arquivoRepository = arquivoRepository;
         this.minioService = minioService;
         this.albumRepository = albumRepository;
         this.artistaRepository = artistaRepository;
         this.artistaAlbumRepository = artistaAlbumRepository;
+        this.artistaService = artistaService;
     }
 
     public AlbumUploadCapaResponseTransfer upload(AlbumRequestTransfer albumRequestTransfer, List<MultipartFile> multipartFileList) {
 		
-		ArtistaEntity artistaEntity = this.artistaRepository
-				.findByCodePublic(albumRequestTransfer.getCodePublicArtista())
-				.orElseThrow(() -> new NegocialException("O artista informado não está cadastrado!"));
+		ArtistaEntity artistaEntity = this.artistaService.recuperarArtista(albumRequestTransfer.getCodePublicArtista());
 		
 		if (!artistaEntity.getIsActive()) {
 		    throw new NegocialException("O artista informado está inativo!");

@@ -1,10 +1,10 @@
 package br.gov.mt.seplag.api.service;
 
-import java.time.Instant;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
+import br.gov.mt.seplag.api.entity.ArtistaEntity;
+import br.gov.mt.seplag.api.exception.NegocialException;
+import br.gov.mt.seplag.api.mapper.ArtistaMapper;
+import br.gov.mt.seplag.api.repository.ArtistaRepository;
+import br.gov.mt.seplag.api.transfer.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,15 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.gov.mt.seplag.api.entity.ArtistaEntity;
-import br.gov.mt.seplag.api.exception.NegocialException;
-import br.gov.mt.seplag.api.mapper.ArtistaMapper;
-import br.gov.mt.seplag.api.repository.ArtistaRepository;
-import br.gov.mt.seplag.api.transfer.ArtistaAtualizacaoRequestTransfer;
-import br.gov.mt.seplag.api.transfer.ArtistaRequestTransfer;
-import br.gov.mt.seplag.api.transfer.ArtistaResponseTransfer;
-import br.gov.mt.seplag.api.transfer.MensagemResponseTransfer;
-import br.gov.mt.seplag.api.transfer.PaginatedResponseTransfer;
+import java.time.Instant;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ArtistaService implements ArtistaInterfaceService {
@@ -111,6 +106,12 @@ public class ArtistaService implements ArtistaInterfaceService {
 		
 		return ArtistaMapper.from(artistaEntity);
 		
+	}
+
+	public ArtistaEntity recuperarArtista(UUID codePublicArtista) {
+		return this.artistaRepository
+				.findByCodePublic(codePublicArtista)
+				.orElseThrow(() -> new NegocialException("O artista informado não está cadastrado!"));
 	}
 
 }
