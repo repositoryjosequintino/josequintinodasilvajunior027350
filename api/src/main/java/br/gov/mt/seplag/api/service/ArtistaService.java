@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -112,6 +113,31 @@ public class ArtistaService implements ArtistaInterfaceService {
 		return this.artistaRepository
 				.findByCodePublic(codePublicArtista)
 				.orElseThrow(() -> new NegocialException("O artista informado não está cadastrado!"));
+	}
+
+	public List<ArtistaResponseTransfer> recuperarArtista(String nome, String sort, int page, int size) {
+
+		Sort.Direction direction = "desc".equalsIgnoreCase(sort) ? Sort.Direction.DESC : Sort.Direction.ASC;
+
+		Pageable pageable = PageRequest.of(page, size, Sort.by(direction, "nome"));
+
+		Page<ArtistaEntity> artistaPage = this.artistaRepository.findByNome(nome, pageable);
+
+		List<ArtistaResponseTransfer> artistaResponseTransferList =
+				artistaPage.getContent()
+						.stream()
+						.map(ArtistaMapper::from)
+						.toList();
+
+		return new PaginatedResponseTransfer<>(
+				artistaResponseTransferList,
+				artistaPage.getNumber(),
+				artistaPage.getSize(),
+				artistaPage.getTotalElements(),
+				artistaPage.getTotalPages(),
+				artistaPage.isFirst(),
+				artistaPage.isLast()
+		).getContent();
 	}
 
 }
