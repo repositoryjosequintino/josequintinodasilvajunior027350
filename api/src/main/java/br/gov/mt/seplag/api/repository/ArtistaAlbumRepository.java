@@ -1,11 +1,14 @@
 package br.gov.mt.seplag.api.repository;
 
+import br.gov.mt.seplag.api.entity.AlbumEntity;
+import br.gov.mt.seplag.api.entity.ArtistaAlbumEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.gov.mt.seplag.api.entity.ArtistaAlbumEntity;
+import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface ArtistaAlbumRepository extends JpaRepository<ArtistaAlbumEntity, Long> {
@@ -22,5 +25,7 @@ public interface ArtistaAlbumRepository extends JpaRepository<ArtistaAlbumEntity
 			)
 	""", nativeQuery = true)
 	boolean existsAlbumPorArtista(@Param("artistaCode") Long artistaCode, @Param("titulo") String titulo);
+
+	Optional<AlbumEntity> findByCodePublic(UUID codePublic);
 
 }

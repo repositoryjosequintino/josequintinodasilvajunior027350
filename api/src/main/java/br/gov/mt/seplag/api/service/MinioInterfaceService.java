@@ -1,14 +1,16 @@
 package br.gov.mt.seplag.api.service;
 
-import java.util.List;
-
+import br.gov.mt.seplag.api.entity.AlbumEntity;
+import br.gov.mt.seplag.api.entity.ArquivoEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.gov.mt.seplag.api.entity.AlbumEntity;
-import br.gov.mt.seplag.api.entity.ArquivoEntity;
+import java.io.InputStream;
+import java.util.List;
 
 @Service
 public interface MinioInterfaceService {
-	List<ArquivoEntity> uploadCapaAlbum(AlbumEntity albumEntity, List<MultipartFile> multipartFileList);
+	List<ArquivoEntity> upload(AlbumEntity albumEntity, List<MultipartFile> multipartFileList);
+	InputStream download(String endereco);
+
 }

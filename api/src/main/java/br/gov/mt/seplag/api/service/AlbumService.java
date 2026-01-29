@@ -1,12 +1,5 @@
 package br.gov.mt.seplag.api.service;
 
-import java.util.List;
-
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-
 import br.gov.mt.seplag.api.entity.AlbumEntity;
 import br.gov.mt.seplag.api.entity.ArquivoEntity;
 import br.gov.mt.seplag.api.entity.ArtistaAlbumEntity;
@@ -20,6 +13,12 @@ import br.gov.mt.seplag.api.transfer.AlbumRequestTransfer;
 import br.gov.mt.seplag.api.transfer.AlbumResponseTransfer;
 import br.gov.mt.seplag.api.transfer.AlbumUploadCapaResponseTransfer;
 import br.gov.mt.seplag.api.transfer.ArquivoResponseTransfer;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Service
 public class AlbumService {
@@ -89,14 +88,14 @@ public class AlbumService {
 		
 		artistaAlbumRepository.save(new ArtistaAlbumEntity(artistaEntity, albumEntity));
 		
-		List<ArquivoEntity> arquivoEntityList = minioService.uploadCapaAlbum(albumEntity, multipartFileList);
+		List<ArquivoEntity> arquivoEntityList = minioService.upload(albumEntity, multipartFileList);
 		
 		List<ArquivoResponseTransfer> arquivoResponseTransferList = arquivoEntityList.stream()
 	            .map(arquivo -> new ArquivoResponseTransfer(
 	                    arquivo.getCodePublic(),
 	                    arquivo.getNome(),
 	                    arquivo.getExtensao(),
-	                    arquivo.getEndereco()
+	                    "/api/v1/arquivo/" + arquivo.getCodePublic()
 	            )).toList();
 		
 		return new AlbumUploadCapaResponseTransfer(
@@ -106,5 +105,17 @@ public class AlbumService {
 			String.valueOf(albumEntity.getCreatedAt())
 		);
 	}
+
+	// public ArquivoResponseTransfer recuperarCapaAlbum(UUID codePublic) {
+
+	// 	AlbumEntity albumEntity = this.artistaAlbumRepository.findByCodePublic(codePublic)
+	// 			.orElseThrow(() -> new NegocialException("Álbum não encontrado!"));
+
+	// 	List<ArquivoEntity> arquivoEntityList = minioService.uploadCapaAlbum(albumEntity, multipartFileList);
+
+	// 	InputStream inputStream = minioService.download(arquivoEntityList);
+
+	// 	return null;
+	// }
 	
 }
