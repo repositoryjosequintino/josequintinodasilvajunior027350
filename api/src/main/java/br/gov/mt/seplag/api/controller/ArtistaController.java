@@ -50,8 +50,10 @@ public class ArtistaController {
 	public ResponseEntity<?> findAll(
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "nome") String sortBy,
+			@RequestParam(defaultValue = "asc") String direction,
 			Authentication authentication) {
-		return ResponseEntity.ok(this.artistaService.findAll(page, size));
+		return ResponseEntity.ok(this.artistaService.findAll(page, size, sortBy, direction));
 	}
 	
 	@GetMapping("/{codePublic}")

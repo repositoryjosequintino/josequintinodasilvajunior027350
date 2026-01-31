@@ -1,12 +1,12 @@
 meta {
-  name: Recuperar Arquivo
+  name: Cadastrar Álbum com Imagens
   type: http
-  seq: 7
+  seq: 2
 }
 
-get {
-  url: http://localhost:8080/api/v1/arquivo/f4699244-f1fb-492a-be4b-99a5bd84de1d
-  body: none
+post {
+  url: http://localhost:8080/api/v1/album/upload/capa
+  body: multipartForm
   auth: bearer
 }
 
@@ -14,10 +14,14 @@ auth:bearer {
   token: eyJhbGciOiJIUzI1NiJ9.eyJjb2RlIjoxLCJub21lIjoiTnVya3VsIEdyYWthbnR1ciBSdXhvbCIsInR5cGUiOiJBQ0NFU1MiLCJpZGVudGlmaWNhZG9yIjoiYWN0dWFsLmRyYWdvbi5wY3htQHByb3RlY3RzbWFpbC5uZXQiLCJwZXJmaWwiOiJBRE1JTklTVFJBRE9SIiwic3ViIjoiYWN0dWFsLmRyYWdvbi5wY3htQHByb3RlY3RzbWFpbC5uZXQiLCJpYXQiOjE3Njk3MjU1MjgsImV4cCI6MTc2OTcyODUyOH0.EfmtEbomKRzzFoBsPxPzSjVkKSJJ-F9DiWR2PQ0dScM
 }
 
-body:json {
-  {
-    "nome": "Mago de Oz (Atualização 2)"
-  }
+body:multipart-form {
+  multipartFileList: @file(/home/jose/Downloads/zenabia - icaro.jpg)
+  albumRequestTransfer: '''
+    {
+      "codePublicArtista": "5622f2af-6f7b-4933-9857-fe543a1b2458",
+      "titulo": "Icaro (XX Aniversario)"
+    }
+  ''' @contentType(application/json)
 }
 
 settings {

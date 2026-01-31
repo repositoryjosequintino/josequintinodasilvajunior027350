@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.Instant;
 import java.util.List;
@@ -84,10 +85,12 @@ public class ArtistaService implements ArtistaInterfaceService {
 		return new MensagemResponseTransfer("Artista inativado com sucesso!");
 		
 	}
-	
-	public PaginatedResponseTransfer<ArtistaResponseTransfer> findAll(int page, int size) {
 
-		Pageable pageable = PageRequest.of(page, size);
+	public PaginatedResponseTransfer<ArtistaResponseTransfer> findAll(int page, int size, String sortBy, String direction) {
+
+		Sort.Direction sortDirection = "desc".equalsIgnoreCase(direction) ? Sort.Direction.DESC : Sort.Direction.ASC;
+
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
 
 		Page<ArtistaEntity> artistaPage = this.artistaRepository.findAll(pageable);
 
