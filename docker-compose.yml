@@ -26,6 +26,25 @@ services:
     volumes:
       - minio_data:/data
 
+  seplag-api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: seplagmt_api
+    restart: always
+    depends_on:
+      - postgres
+      - minio
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/db_seplagmt_desenvolvimento
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JWT_SECRET: "@SeplagMTAssinaturaSeplagService1"
+      MAIL_USERNAME: repository.desenvolvimento@gmail.com
+      MAIL_PASSWORD: ittd bwhj iiob terk
+
 volumes:
   postgres_data:
   minio_data:

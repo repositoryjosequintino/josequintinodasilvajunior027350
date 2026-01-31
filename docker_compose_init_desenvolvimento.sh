@@ -2,6 +2,6 @@
 
 docker compose down -v
 
-sudo systemctl stop postgresql
+# sudo systemctl stop postgresql
 
 docker compose up -d
