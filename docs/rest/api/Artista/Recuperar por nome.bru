@@ -1,0 +1,30 @@
+meta {
+  name: Recuperar por nome
+  type: http
+  seq: 8
+}
+
+get {
+  url: http://localhost:8080/api/v1/artista/pesquisar?nome=b
+  body: none
+  auth: bearer
+}
+
+params:query {
+  nome: b
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJjb2RlIjoyLCJub21lIjoiSm9zw6kgUXVpbnRpbm5vIiwidHlwZSI6IkFDQ0VTUyIsImlkZW50aWZpY2Fkb3IiOiJqb3NlcXVpbnRpbm9AaG90bWFpbC5jb20uYnIiLCJwZXJmaWwiOiJVU1VBUklPIiwic3ViIjoiam9zZXF1aW50aW5vQGhvdG1haWwuY29tLmJyIiwiaWF0IjoxNzcwMTMyNjA0LCJleHAiOjE3NzAxMzU2MDR9.TG_fhH58crg0StP8xZDYIkHvDIbU2fTKeJhoibHNRGg
+}
+
+body:json {
+  {
+    "nome": "Mago de Oz (Atualização 2)"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

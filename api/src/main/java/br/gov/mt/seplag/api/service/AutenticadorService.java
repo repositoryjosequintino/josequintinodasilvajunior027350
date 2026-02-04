@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +28,8 @@ import br.gov.mt.seplag.api.utility.JwtUtility;
 
 @Service
 public class AutenticadorService {
-	
+
+	private static final Logger log = LoggerFactory.getLogger(AutenticadorService.class);
 	private final UsuarioRepository usuarioRepository;
 	
 	private final JwtUtility jwtUtility;
@@ -94,20 +97,22 @@ public class AutenticadorService {
 	}
 	
 	public UsuarioResponseTransfer refreshAccessToken(RefreshTokenRequestTransfer refreshTokenRequestTransfer) {
-		
+
 		String refreshToken = refreshTokenRequestTransfer.getRefreshToken();
 		
 		String identificador = jwtUtility.extractIdentificadorToken(refreshToken);
+
+		log.info("[AutenticadorService] Acionando a funcionalidade de RefresToken para o ususario: {}", identificador);
 		
 		if (!jwtUtility.isRefreshToken(refreshToken)) {
-			throw new InvalidTokenException("O Token informado é inválido!");
+			throw new InvalidTokenException("(AutenticadorService) O Token informado é inválido!");
 		}
 		
 		UsuarioEntity usuarioEntity = usuarioRepository.findByRefreshToken(refreshToken)
-				.orElseThrow(() -> new InvalidTokenException("O Token informado está expirado ou inválido!"));
+				.orElseThrow(() -> new InvalidTokenException("(AutenticadorService) O Token informado está expirado ou inválido!!"));
 		
 		if(!jwtUtility.validateToken(refreshToken, identificador)) {
-			throw new TokenExpiredException("O Token informado está expirado ou inválido!!");
+			throw new TokenExpiredException("(AutenticadorService) O Token informado está expirado ou inválido!!!");
 		}
 		
 		String accessTokenNew = this.jwtUtility.generateAccessToken(usuarioEntity.getCode(), usuarioEntity.getNome(),

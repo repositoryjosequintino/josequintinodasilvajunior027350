@@ -118,7 +118,7 @@ public class ArtistaService implements ArtistaInterfaceService {
 				.orElseThrow(() -> new NegocialException("O artista informado não está cadastrado!"));
 	}
 
-	public List<ArtistaResponseTransfer> recuperarArtista(String nome, String sort, int page, int size) {
+	public PaginatedResponseTransfer<ArtistaResponseTransfer> recuperarArtista(String nome, String sort, int page, int size) {
 
 		Sort.Direction direction = "desc".equalsIgnoreCase(sort) ? Sort.Direction.DESC : Sort.Direction.ASC;
 
@@ -140,7 +140,7 @@ public class ArtistaService implements ArtistaInterfaceService {
 				artistaPage.getTotalPages(),
 				artistaPage.isFirst(),
 				artistaPage.isLast()
-		).getContent();
+		);
 	}
 
 }

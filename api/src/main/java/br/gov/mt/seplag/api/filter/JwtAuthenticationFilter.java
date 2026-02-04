@@ -20,42 +20,51 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-	
-	@Autowired
+
+    @Autowired
     private JwtUtility jwtUtility;
 
-	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-		
-		final String authorizationHeader = request.getHeader("Authorization");
-		
-		String identificador = null;
-		String jwt = null;
-		
-		if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-			try {
-				jwt = authorizationHeader.substring(7);
-				identificador = jwtUtility.extractIdentificadorToken(jwt);
-			} catch (Exception e) {
-				logger.error("Erro ao manipular JWT: " + e.getMessage());
-				throw new BadCredentialsException("Token expirado ou inválido!");
-			}
-		}
-		
-		if (identificador != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-			if (jwtUtility.validateToken(jwt, identificador) && jwtUtility.isAccessToken(jwt)) {
-				String perfil = jwtUtility.extractPerfilToken(jwt);
-				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-						new UsernamePasswordAuthenticationToken(identificador,
-						null, 
-						Collections.singleton(new SimpleGrantedAuthority("ROLE_" + perfil)));
-					usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-					SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-			}
-		}
+    @Override
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
+    ) throws ServletException, IOException {
 
-		filterChain.doFilter(request, response);
-		
-	}
+        final String authorizationHeader = request.getHeader("Authorization");
+
+        String identificador = null;
+        String jwt = null;
+
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            try {
+                jwt = authorizationHeader.substring(7);
+                identificador = jwtUtility.extractIdentificadorToken(jwt);
+            } catch (Exception e) {
+                filterChain.doFilter(request, response);
+                logger.warn("JWT inválido ou expirado: " + e.getMessage());
+                return;
+            }
+        }
+
+        if (identificador != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            if (jwtUtility.validateToken(jwt, identificador) && jwtUtility.isAccessToken(jwt)) {
+
+                String perfil = jwtUtility.extractPerfilToken(jwt);
+
+                UsernamePasswordAuthenticationToken auth =
+                        new UsernamePasswordAuthenticationToken(
+                                identificador,
+                                null,
+                                Collections.singleton(new SimpleGrantedAuthority("ROLE_" + perfil))
+                        );
+
+                auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            }
+        }
+
+        filterChain.doFilter(request, response);
+    }
 
 }

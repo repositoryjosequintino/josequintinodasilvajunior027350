@@ -1,8 +1,6 @@
 package br.gov.mt.seplag.api.configuration;
 
-import java.util.Arrays;
-import java.util.List;
-
+import br.gov.mt.seplag.api.filter.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -17,12 +15,17 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import br.gov.mt.seplag.api.filter.JwtAuthenticationFilter;
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfiguration {
+
+	private static final String[] ORIGEM_LIST = {
+		"http://localhost:4200"
+	};
 
 	private JwtAuthenticationFilter jwtAuthenticationFilter;
 	
@@ -45,10 +48,15 @@ public class SecurityConfiguration {
 	}
 
 	@Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, JwtAuthenticationEntryPointConfiguration jwtAuthenticationEntryPointConfiguration) throws Exception {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
-                .cors(cors -> {})
+                .cors(cors -> {
+					cors.configurationSource(configurationSource());
+				})
+				.exceptionHandling(ex -> ex
+						.authenticationEntryPoint(jwtAuthenticationEntryPointConfiguration)
+				)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PUBLIC_ENDPOINT).permitAll()
                         .anyRequest().authenticated())
@@ -62,7 +70,7 @@ public class SecurityConfiguration {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 			corsConfiguration.setAllowedMethods(Arrays.asList(VERBOS_HTTP));
 			corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
-			corsConfiguration.setAllowedOrigins(List.of("*"));
+			corsConfiguration.setAllowedOrigins(List.of(ORIGEM_LIST));
 			UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
 			urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
 		return urlBasedCorsConfigurationSource;
