@@ -3,13 +3,23 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "73f69708-ffd7-4030-b4c4-510fe92c90d1"
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
     "web": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -26,14 +36,8 @@
               }
             ],
             "styles": [
-              "src/material-theme.scss",
               "src/styles.css"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
