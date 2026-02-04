@@ -18,6 +18,8 @@ import { Artista } from './pages/artista/artista';
 import { ArtistaCadastrarPage } from './pages/artista/artista-cadastrar-page/artista-cadastrar-page';
 import { ArtistaDetalharPage } from './pages/artista/artista-detalhar-page/artista-detalhar-page';
 import { ArtistaEditarPage } from './pages/artista/artista-editar-page/artista-editar-page';
+import { HeaderComponent } from './components/header-component/header-component';
+import { FooterComponent } from './components/footer-component/footer-component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ArtistaEditarPage } from './pages/artista/artista-editar-page/artista-e
     Artista,
     ArtistaCadastrarPage,
     ArtistaDetalharPage,
-    ArtistaEditarPage
+    ArtistaEditarPage,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
