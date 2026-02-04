@@ -11,6 +11,13 @@ import { Album } from './components/album/album';
 import { AlbumCadastrarComponent } from './components/album/album-cadastrar-component/album-cadastrar-component';
 import { AlbumEditarComponent } from './components/album/album-editar-component/album-editar-component';
 import { AlbumDetalharComponent } from './components/album/album-detalhar-component/album-detalhar-component';
+import { AlbumDetalharPage } from './pages/album/album-detalhar-page/album-detalhar-page';
+import { AlbumCadastrarPage } from './pages/album/album-cadastrar-page/album-cadastrar-page';
+import { AlbumEditarPage } from './pages/album/album-editar-page/album-editar-page';
+import { Artista } from './pages/artista/artista';
+import { ArtistaCadastrarPage } from './pages/artista/artista-cadastrar-page/artista-cadastrar-page';
+import { ArtistaDetalharPage } from './pages/artista/artista-detalhar-page/artista-detalhar-page';
+import { ArtistaEditarPage } from './pages/artista/artista-editar-page/artista-editar-page';
 
 @NgModule({
   declarations: [
@@ -22,7 +29,14 @@ import { AlbumDetalharComponent } from './components/album/album-detalhar-compon
     Album,
     AlbumCadastrarComponent,
     AlbumEditarComponent,
-    AlbumDetalharComponent
+    AlbumDetalharComponent,
+    AlbumDetalharPage,
+    AlbumCadastrarPage,
+    AlbumEditarPage,
+    Artista,
+    ArtistaCadastrarPage,
+    ArtistaDetalharPage,
+    ArtistaEditarPage
   ],
   imports: [
     BrowserModule,
